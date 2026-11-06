@@ -1,8 +1,10 @@
-# Release-candidate validation
+# Validation
 
-Validated locally on 3 November 2026; no publication, GitHub repository, commit,
-remote or release tag was created. Mahdi Moosa confirmed the MIT copyright and
-software authorship. A manuscript DOI is not required for software use/release.
+This record describes bounded installation, scientific regression and integration
+checks performed on version 0.1.0rc1. Initial integration was completed on
+3 November 2026; technical-failure regression checks were completed on 5–6 November.
+The final suite passed **29 tests**, with no failures, errors or skipped tests.
+Historical cohort analyses were not repeated.
 
 ## Fresh installation
 
@@ -74,8 +76,7 @@ Original historical cohort rosters/seeds/private genetic observations are not
 included. Country agreement for stratified selection and external reference assets
 remain explicit prerequisites. Companion manuscript analyses remain separate.
 
-Full checksums, artifact inventories, isolated installation and disclosure audit
-results are supplied in the local release-review directory, outside this repo.
+Detailed build and execution receipts are retained separately from the software.
 Passing scans and synthetic tests does not guarantee anonymity or universal
 scientific equivalence across changing tools, databases and archive records.
 
