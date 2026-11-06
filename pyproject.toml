@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wgs-conta-pipeline"
+version = "0.1.0rc1"
+authors = [{name = "Mahdi Moosa"}]
+description = "Conservative human-sequence detection in bacterial isolate short-read WGS"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+wgs-conta = "wgs_conta.entry:main"
+wgs-conta-archive = "wgs_conta.archive:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+wgs_conta = ["VERSION"]

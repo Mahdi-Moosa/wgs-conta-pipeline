@@ -1,0 +1,19 @@
+name: wgs-conta-release
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.14
+  - pip
+  - setuptools>=77
+  - sra-tools=3.4.1
+  - seqkit=2.13.0
+  - minimap2=2.31
+  - samtools=1.24
+  - kraken2=2.17.1
+  - pigz=2.8
+  - entrez-direct
+  - ncbi-datasets-cli
+  - curl
+  - awscli
+# Fresh isolated Conda installation validated; wrapper build metadata requires setuptools>=77.

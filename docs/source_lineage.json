@@ -1,0 +1,114 @@
+[
+  {
+    "file": "src/wgs_conta/__init__.py",
+    "source_module": "__init__.py",
+    "source_sha256": "3df43d4e13ae6655198538726befcfa51d362e36b3451e8b3528afa6d6b4de63",
+    "release_sha256": "d0a5f1a9f43a7d8d95166cfe3c6a67732c6bb7f20e21cf99a5821579f940e2cb",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/config.py",
+    "source_module": "config.py",
+    "source_sha256": "8835b82f94fbb8224c297308ef0a884e684a548cbed276c9fc217c8db9c985e8",
+    "release_sha256": "02b5901278fb5ca378ec8d0355e16cd2c0d49bd9d6e88ec39f66b39c25398b18",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/analysis.py",
+    "source_module": "analysis.py",
+    "source_sha256": "eb07123bf5412346214797a30d4c6efc6c4c3bb8b9b24ae491343d3b442db122",
+    "release_sha256": "32163a3f4b986ab02b182a01d7106d5b2740225369c026b847b980f0b666f74f",
+    "change": "Scientific predicates unchanged; required samtools-view exit-status handling added for technical failures."
+  },
+  {
+    "file": "src/wgs_conta/ion_analysis.py",
+    "source_module": "ion_analysis.py",
+    "source_sha256": "be356f0803d8a8de5753da2dff79aaddb5c80b19392e90c20cf84e5c62bd6a1b",
+    "release_sha256": "be356f0803d8a8de5753da2dff79aaddb5c80b19392e90c20cf84e5c62bd6a1b",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/util.py",
+    "source_module": "util.py",
+    "source_sha256": "20ea7b613324836057cbdafbf96c1d2f76f030a947ca353013a967a96072ec7c",
+    "release_sha256": "20ea7b613324836057cbdafbf96c1d2f76f030a947ca353013a967a96072ec7c",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/acquisition.py",
+    "source_module": "acquisition.py",
+    "source_sha256": "e0d6453da5fda9b3fc10081f1c8b14321e26807298e4967fcb0de25333bd3b11",
+    "release_sha256": "87e6fbade8c59c735531fc8c5aa5b3264c2f7dfa9716ee57cbddc9897ef13558",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/assemblies.py",
+    "source_module": "assemblies.py",
+    "source_sha256": "8518d73ff0e0e03a92d41da06ca4229bbe57cc26ea2cf262522bdd23f59cf7e1",
+    "release_sha256": "8518d73ff0e0e03a92d41da06ca4229bbe57cc26ea2cf262522bdd23f59cf7e1",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/db.py",
+    "source_module": "db.py",
+    "source_sha256": "bad539e7b10ccf5bb71db0e4a52d8f622537d1b3c4bda10ca8299678fc065fc2",
+    "release_sha256": "bad539e7b10ccf5bb71db0e4a52d8f622537d1b3c4bda10ca8299678fc065fc2",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/master.py",
+    "source_module": "master.py",
+    "source_sha256": "2191682d11c6565a2bd2c64426bd90fd83474ece4ac2bc33c99aa9623f53efbb",
+    "release_sha256": "2191682d11c6565a2bd2c64426bd90fd83474ece4ac2bc33c99aa9623f53efbb",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/worker.py",
+    "source_module": "worker.py",
+    "source_sha256": "4092517b560720b0399591db9e44930c43756adb186ba7f36484d92db363a9cc",
+    "release_sha256": "4092517b560720b0399591db9e44930c43756adb186ba7f36484d92db363a9cc",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/aws_prefetch.py",
+    "source_module": "aws_prefetch.py",
+    "source_sha256": "63c93a1e2443f8181442e74c257abb891d17cad27b23a63c80011d838ed6e7b9",
+    "release_sha256": "63c93a1e2443f8181442e74c257abb891d17cad27b23a63c80011d838ed6e7b9",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/sra_cache.py",
+    "source_module": "sra_cache.py",
+    "source_sha256": "f4d931f9032270ad2135af5f47a337f0c4153dfbde03c5ef2b5e4d09188e2a5c",
+    "release_sha256": "a55eade0e54515df1bb5335ca1d759d11c16a970ff0f7431b73638b5173266da",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/master_cli.py",
+    "source_module": "master_cli.py",
+    "source_sha256": "7bd7a4b9944591a266aa19448f11f77add7d21a6cab82708ed3ce087a46edce1",
+    "release_sha256": "336860a07e01f23cfef0a65aec2c007c8f1e3206bb60c5fa922db420f1752495",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/metadata_rules.py",
+    "source_module": "metadata_rules.py",
+    "source_sha256": "0452d6f156c332e41138b617094b6dad65543ee95241293abf96d2b57ba73d3f",
+    "release_sha256": "0452d6f156c332e41138b617094b6dad65543ee95241293abf96d2b57ba73d3f",
+    "change": "byte-identical"
+  },
+  {
+    "file": "src/wgs_conta/archive.py",
+    "source_module": "capture_ena_snapshot.py",
+    "source_sha256": "c79d81e28d153d3b04357747d7a8f7970301bb1a1a428c97f3d3428a181b7606",
+    "release_sha256": "2705725f8e3c80806aeeb6ad45206db05dcf64f59e7e3ca53c52269e821f72e6",
+    "change": "reviewed portability/security adaptation"
+  },
+  {
+    "file": "src/wgs_conta/sampling.py",
+    "source_module": "replicate_sampling.py",
+    "source_sha256": "99d91471caf24f1dc3ae67c4d99d70b9063a880f79f07f2529b5558586c5c34e",
+    "release_sha256": "99d91471caf24f1dc3ae67c4d99d70b9063a880f79f07f2529b5558586c5c34e",
+    "change": "byte-identical"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "platforms": [
+    "ILLUMINA",
+    "BGISEQ",
+    "DNBSEQ",
+    "ION_TORRENT"
+  ],
+  "start_date": "2020-01-01",
+  "cutoff_date": "2020-01-31",
+  "api_base": "https://www.ebi.ac.uk/ena/portal/api",
+  "max_attempts": 4,
+  "connect_timeout_seconds": 30,
+  "transfer_timeout_seconds": 300,
+  "retry_base_seconds": 4,
+  "max_partition_rows": 100000,
+  "final_audit_rounds": 3,
+  "snapshot_id": "user_defined_independent_snapshot"
+}

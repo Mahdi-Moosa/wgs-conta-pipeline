@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite this software when using it in research."
+title: "WGS contamination analysis pipeline"
+type: software
+version: 0.1.0rc1
+license: MIT
+abstract: "Conservative human-sequence detection and quantification in bacterial isolate short-read WGS archives."
+authors:
+  - family-names: Moosa
+    given-names: Mahdi

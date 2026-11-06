@@ -1,0 +1,6 @@
+include README.md LICENSE CITATION.cff pyproject.toml environment.yml .gitignore
+recursive-include src/wgs_conta *.py VERSION
+recursive-include configs *.ini *.json
+recursive-include docs *.md *.json
+recursive-include tests *.py
+recursive-include examples *.py
