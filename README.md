@@ -33,15 +33,17 @@ support for arbitrary sample types. Long-read sequencing and additional
 platform/layout combinations have not been validated and are unsupported.
 Archive labels alone do not establish biological eligibility.
 
-Included: metadata collection, auditable metadata eligibility rules, independent
-metadata-only cohort selection, archive acquisition, read normalization, strict
-human mapping, chromosome counts, Kraken corroboration, exact-BioSample assembly
-challenge, bounded workers, checkpoints/resume and aggregate exports.
+## Capabilities
 
-Not included: RNA splice analysis, Hostile, ClinVar, population likelihoods,
-bootstraps, SNP configurations, concordance, bacterial assembly building,
-hierarchical models or manuscript figures. See [analysis boundaries](docs/analysis_interfaces.md).
-No superseded four-population ascertainment workflow is included.
+The pipeline supports the following analyses and workflows:
+
+- **Archive exploration:** Retrieve sequencing metadata, evaluate bacterial-isolate eligibility, and select independent cohorts using metadata-based sampling.
+- **Read acquisition:** Download and validate sequencing reads from public archives.
+- **Human-sequence detection:** Identify high-confidence human-aligned reads and fragments using stringent alignment-quality, coverage and sequence-identity criteria.
+- **Contamination quantification:** Measure human-sequence burden and chromosome-level representation, with Kraken2-based corroboration.
+- **Assembly-based assessment:** Evaluate human-aligned reads against bacterial assemblies linked to the same BioSample.
+- **Batch processing:** Analyze multiple sequencing libraries with configurable parallel execution, checkpoints, failure tracking and resume support.
+- **Results export:** Generate run-level results, chromosome summaries and aggregate outputs for downstream analysis.
 
 ## Installation
 
