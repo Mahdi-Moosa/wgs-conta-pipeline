@@ -7,9 +7,11 @@ calling, chromosome summaries and exact-assembly adjudication.
 
 ## Scope
 
-Software version **0.1.0rc1** implements the validated paired-end and single-end
-callers of scientific method **2.3.0**. Historical manuscript cohorts used several
-orchestration versions; see [method fidelity](docs/methods_consistency.md).
+Software version **0.1.0rc1** implements conservative human-sequence detection
+and quantification using reference alignment, mapping-quality, alignment-coverage
+and sequence-identity filters, with layout-specific fragment counting and
+coordinate deduplication. See [method fidelity](docs/methods_consistency.md) for
+detailed scientific definitions and implementation conventions.
 
 Supported combinations:
 
@@ -19,9 +21,17 @@ Supported combinations:
 | BGISEQ / DNBSEQ | PAIRED | coordinate-deduplicated fragment |
 | ION_TORRENT | SINGLE | coordinate-deduplicated read |
 
-Other combinations, including long reads, are unsupported. The pipeline is for
-eligible bacterial isolates, not metagenomes, direct specimens or human-cell
-workflows. Archive labels alone do not establish biological eligibility.
+The pipeline was developed and validated primarily for bacterial isolate
+short-read WGS datasets. Its core methods for human-reference alignment and
+contamination quantification may also apply to other sample types, including
+metagenomic datasets, but these applications have not been systematically
+validated. Archive eligibility rules and bacterial assembly-based adjudication
+are specific to the bacterial isolate workflow and may require adaptation for
+other applications. The current CLI supports only the platform/layout
+combinations listed above; potential applicability does not imply end-to-end
+support for arbitrary sample types. Long-read sequencing and additional
+platform/layout combinations have not been validated and are unsupported.
+Archive labels alone do not establish biological eligibility.
 
 Included: metadata collection, auditable metadata eligibility rules, independent
 metadata-only cohort selection, archive acquisition, read normalization, strict
@@ -71,10 +81,20 @@ are separate. See [dependencies](docs/dependencies.md).
 
 ## Reference preparation
 
-Follow [reference preparation](docs/references.md). Use the exact CHM13v2.0
-masked-Y/rCRS analysis set and an `-x sr` minimap2 index. The FASTA checksum is
-checked before a production run. Supply the verified local index SHA-256 and a
-Kraken database version/checksum manifest. No reference data are bundled.
+The pipeline uses the **T2T-CHM13v2.0 masked-Y + rCRS** human reference genome:
+the Y pseudoautosomal regions are masked, and the mitochondrial sequence is rCRS.
+Reference sequences and minimap2 indexes are **not distributed with the software**.
+
+Obtain `chm13v2.0_maskedY_rCRS.fa.gz` separately from the
+[official T2T resource page](https://genomeinformatics.github.io/CHM13v2/), or use
+the [reference FASTA download](https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0_maskedY_rCRS.fa.gz).
+Download and decompress the reference, then prepare a minimap2 short-read index
+(`-x sr`). The pipeline checks the FASTA against its validated SHA-256 and the
+index against the configured SHA-256.
+
+A compatible Kraken2 database must also be provided separately, with a verified
+version/checksum manifest. See [reference preparation](docs/references.md) for
+download, checksum, indexing and configuration commands.
 
 Copy `configs/pipeline.example.ini` to `configs/local.ini` and set paths and
 reference identity. Paths are relative to the INI file, not to a research tree.

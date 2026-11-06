@@ -1,22 +1,38 @@
 # External references
 
-No genomes, VCFs, human sequences, databases or clinical resources are bundled.
+Reference genomes, minimap2 indexes, Kraken2 databases, population VCFs and
+clinical resources must be provisioned separately; they are not bundled with
+software version 0.1.0rc1.
 
 ## Human mapping analysis set
 
-Source recorded in the original preparation log:
-`https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0_maskedY_rCRS.fa.gz`
+Use the **T2T-CHM13v2.0 masked-Y + rCRS** analysis set from the
+[official T2T resource page](https://genomeinformatics.github.io/CHM13v2/):
+[`chm13v2.0_maskedY_rCRS.fa.gz`](https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0_maskedY_rCRS.fa.gz).
 
-This is CHM13v2.0 with the completed Y chromosome, masked Y pseudoautosomal
-regions and rCRS mitochondrion. It is not a reference with the entire Y masked.
-The retained upstream download records give compressed MD5
-`b17cd2bdd8eb5544e195d6a8882e417b` and compressed size 980,387,160 bytes.
-The retained frozen reference configuration identifies decompressed FASTA SHA-256:
-`a5128da5a5729d1ef92bf2040494092d784a5ff07e4d08f7b9f385b5498d84d3`.
-These are preserved provenance values; remote availability was not re-probed in
-this packaging audit.
+This analysis set contains the completed Y chromosome with its pseudoautosomal
+regions hard masked with Ns, and uses rCRS for the mitochondrial sequence. It
+neither excludes Y nor masks the entire chromosome. Do not substitute the unmasked-Y,
+no-Y or other mitochondrial-reference analysis sets.
 
-Example external preparation (not automatically executed by installation):
+The retained reference preparation and validation records identify:
+
+| Resource | Recorded identity |
+|---|---|
+| Compressed FASTA | MD5 `b17cd2bdd8eb5544e195d6a8882e417b`; 980,387,160 bytes |
+| Decompressed FASTA | SHA-256 `a5128da5a5729d1ef92bf2040494092d784a5ff07e4d08f7b9f385b5498d84d3` |
+| Historical short-read minimap2 index | SHA-256 `2158acb5aef0f7b9e8c09fcab1ac7e3c9a7281817f0a9a081380074580a72555` |
+
+These are retained validation values, not newly calculated hashes. The official
+resource page and a header-only check of the FASTA download URL were verified on
+6 November 2026; the genome was not downloaded for that check. The S3 ETag is not
+the documented MD5 checksum.
+
+### Download and index
+
+Run from the repository root. Keep references outside all workspace and cleanup
+roots. These commands download the external reference; installation does not do so.
+Stop if a checksum check fails.
 
 ```bash
 mkdir -p references
@@ -25,18 +41,45 @@ curl --fail --location --continue-at - \
   https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0_maskedY_rCRS.fa.gz
 printf '%s  %s\n' b17cd2bdd8eb5544e195d6a8882e417b references/chm13v2.0_maskedY_rCRS.fa.gz | md5sum --check
 gzip -dc references/chm13v2.0_maskedY_rCRS.fa.gz > references/chm13v2.0_maskedY_rCRS.fa
-sha256sum references/chm13v2.0_maskedY_rCRS.fa
+printf '%s  %s\n' a5128da5a5729d1ef92bf2040494092d784a5ff07e4d08f7b9f385b5498d84d3 references/chm13v2.0_maskedY_rCRS.fa | sha256sum --check
 minimap2 -x sr -d references/chm13v2.0_maskedY_rCRS.sr.mmi references/chm13v2.0_maskedY_rCRS.fa
 samtools faidx references/chm13v2.0_maskedY_rCRS.fa
 sha256sum references/chm13v2.0_maskedY_rCRS.sr.mmi
 ```
 
-Compare the FASTA hash with the pinned value above. Configure your verified local
-index hash. The retained historical short-read index hash is
-`2158acb5aef0f7b9e8c09fcab1ac7e3c9a7281817f0a9a081380074580a72555`;
-an index rebuilt with a different executable may differ. Do not substitute a
-map-ont/asm index. The provenance of the index-to-FASTA construction must be
-retained externally; checking a supplied index hash alone does not prove its source.
+Use the documented minimap2 version in [environment.yml](../environment.yml).
+Record your verified local index hash: an index rebuilt with a different executable
+may differ from the historical hash. Do not use a `map-ont` or `asm` index. Retain
+the index-building command, tool version and source FASTA identity externally;
+checking an index hash alone does not prove which FASTA or preset produced it.
+
+### Configure and validate
+
+Copy [configs/pipeline.example.ini](../configs/pipeline.example.ini) to
+`configs/local.ini`. Set these entries, retaining the other example settings:
+
+```ini
+[references]
+human_index = ../references/chm13v2.0_maskedY_rCRS.sr.mmi
+kraken_db = ../references/kraken2
+
+[reference_identity]
+human_fasta = ../references/chm13v2.0_maskedY_rCRS.fa
+human_index_sha256 = SET_VERIFIED_64_CHARACTER_SHA256
+kraken_identity_file = ../references/kraken2_identity.json
+```
+
+Replace `SET_VERIFIED_64_CHARACTER_SHA256` with the verified SHA-256 of your local
+short-read index. Paths are relative to the INI file. The runtime validator checks
+the decompressed FASTA against its fixed validated hash above and the index against
+`human_index_sha256`; setting an arbitrary FASTA hash in the configuration does not
+permit another reference build. Provide the separately verified Kraken2 database
+and identity manifest described below before full validation.
+
+```bash
+wgs-conta validate --config configs/local.ini --paths-only
+wgs-conta validate --config configs/local.ini
+```
 
 ## Kraken2 and exact bacterial assemblies
 
